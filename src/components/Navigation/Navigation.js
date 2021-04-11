@@ -31,6 +31,14 @@ const NavigationList = styled.ul`
 const NavigationListItem = styled.li`
   font-weight: 600;
   margin-left: 32px;
+  border-bottom: 2px solid transparent;
+  border-top: 2px solid transparent;
+  transition: 0.3s;
+
+  :hover {
+    border-bottom: 2px solid black;
+    border-top: 2px solid transparent;
+  }
 `;
 
 const Navigation = () => (

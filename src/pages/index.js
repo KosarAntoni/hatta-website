@@ -18,11 +18,13 @@ const ContentWrapper = styled.div`
     width: 70%;
     line-height: 0.9;
     margin: 0;
+    user-select: none;
   }
 
   p {
     margin: 20px 0 40px;
     width: 35%;
+    user-select: none;
   }
 `
 
