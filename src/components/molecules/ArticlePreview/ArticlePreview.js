@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { GatsbyImage } from "gatsby-plugin-image"
 import {Link} from "gatsby"
+import Paragraph from "../../atoms/Paragraph/Paragraph"
 
 const PreviewWrapper = styled(Link)`
   display: block;
@@ -19,7 +20,6 @@ const PreviewInfoLabel = styled.div`
   position: absolute;
   left: 0;
   bottom: 35px;
-  width: 80%;
   min-height: 40px;
   background-color: black;
   color: white;
@@ -31,12 +31,12 @@ const PreviewInfoLabel = styled.div`
   }
 `;
 
-const Preview = ({ title, excerpt, slug, image }) => (
+const Preview = ({ title, slug, image, date }) => (
   <PreviewWrapper to={`/articles/${slug}`}>
     <StyledGatsbyImage image={image} alt={title}/>
     <PreviewInfoLabel>
-      <h2>{title}</h2>
-      <p>{excerpt}</p>
+      <Paragraph bold>{title}</Paragraph>
+      <Paragraph>{date}</Paragraph>
     </PreviewInfoLabel>
   </PreviewWrapper>
 );

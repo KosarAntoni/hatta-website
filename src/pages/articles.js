@@ -1,8 +1,9 @@
 import React from "react"
 import styled from "styled-components"
 import { graphql } from "gatsby"
-import ArticlePreview from "../components/ArticlePreview/ArticlePreview"
-import PageInfo from "../components/PageInfo/PageInfo"
+import ArticlePreview from "../components/molecules/ArticlePreview/ArticlePreview"
+import PageInfo from "../components/molecules/PageInfo/PageInfo"
+import slugify from "slugify"
 
 const ArticlesWrapper = styled.div`
   display: grid;
@@ -12,18 +13,19 @@ const ArticlesWrapper = styled.div`
 
 const pageData = {
   title: "articles",
-  paragraph: `While artists work from real to the abstract, architects must work from the abstract to the real.`
 }
 
 const ArticlesPage = ({ data }) => (
   <>
-    <PageInfo title={pageData.title} paragraph={pageData.paragraph} />
+    <PageInfo title={pageData.title} paragraph={data.datoCmsHeadline.headlineText} />
     <ArticlesWrapper>
-      {data.allMdx.nodes.map(item => (
-        <ArticlePreview title={item.frontmatter.title}
-                        excerpt={item.excerpt}
-                        slug={item.frontmatter.slug}
-                        image={item.frontmatter.featuredImage.childImageSharp.gatsbyImageData}
+      {data.allDatoCmsArticle.nodes.map(item => (
+        <ArticlePreview
+          key={item.id}
+          title={item.title}
+          image={item.featuredImage.gatsbyImageData}
+          date={item.meta.publishedAt}
+          slug={slugify(item.title,{lower:true})}
         />
       ))}
     </ArticlesWrapper>
@@ -32,19 +34,19 @@ const ArticlesPage = ({ data }) => (
 
 export const query = graphql`
   {
-    allMdx {
+    datoCmsHeadline {
+      headlineText
+    }
+    allDatoCmsArticle {
       nodes {
-        frontmatter {
-          author
-          slug
-          title
-          featuredImage {
-            childImageSharp {
-              gatsbyImageData(placeholder: TRACED_SVG)
-            }
-          }
+        id
+        featuredImage {
+          gatsbyImageData(layout: FULL_WIDTH, placeholder: TRACED_SVG)
         }
-        excerpt(pruneLength: 50)
+        title
+        meta {
+          publishedAt(formatString: "DD.MM.YYYY")
+        }
       }
     }
   }

@@ -10,8 +10,9 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: inherit;
   }
   body {
-    margin: 0;
-    padding: 80px 65px 0;
+    margin: 0 auto;
+    max-width: 1268px;
+    padding: 100px 0 0;
     font-family: 'Montserrat', sans-serif;
   }
   button {

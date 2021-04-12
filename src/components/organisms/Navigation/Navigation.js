@@ -3,13 +3,16 @@ import styled from "styled-components";
 import { Link } from "gatsby";
 
 const NavigationWrapper = styled.nav`
-  position: absolute;
-  top: 20px;
-  left: 30px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 30px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   font-family: 'Montserrat', sans-serif;
+  background-color: #fff;
 
   a {
     text-decoration: none;
@@ -50,25 +53,25 @@ const Navigation = () => (
       </Logo>
     <NavigationList>
       <NavigationListItem>
-        <Link to="/articles">
-          articles
-        </Link>
-        </NavigationListItem>
-      <NavigationListItem>
         <Link to="/about">
           about
         </Link>
-        </NavigationListItem>
+      </NavigationListItem>
+      <NavigationListItem>
+        <Link to="/articles">
+          articles
+        </Link>
+      </NavigationListItem>
       <NavigationListItem>
         <Link to="/gallery">
           gallery
         </Link>
-        </NavigationListItem>
+      </NavigationListItem>
       <NavigationListItem>
         <Link to="/contact">
           contact
         </Link>
-        </NavigationListItem>
+      </NavigationListItem>
     </NavigationList>
   </NavigationWrapper>
 );

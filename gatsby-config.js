@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby Default Starter`,
@@ -24,17 +26,15 @@ module.exports = {
         path: `${__dirname}/src/assets/images`,
       },
     },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `articles`,
-        path: `${__dirname}/src/data/articles`,
-      },
-    },
-    `gatsby-plugin-mdx`,
     `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-source-datocms`,
+      options: {
+        apiToken: process.env.API_DATO_CMS,
+      },
+    },
     // {
     //   resolve: `gatsby-plugin-manifest`,
     //   options: {
