@@ -5,15 +5,15 @@ import ArticlePreview from "../components/molecules/ArticlePreview/ArticlePrevie
 import PageInfo from "../components/molecules/PageInfo/PageInfo"
 import slugify from "slugify"
 
+const pageData = {
+  title: "articles",
+}
+
 const ArticlesWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 50px;
 `
-
-const pageData = {
-  title: "articles",
-}
 
 const ArticlesPage = ({ data }) => (
   <>

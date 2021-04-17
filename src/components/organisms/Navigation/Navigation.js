@@ -13,6 +13,7 @@ const NavigationWrapper = styled.nav`
   justify-content: flex-start;
   font-family: 'Montserrat', sans-serif;
   background-color: #fff;
+  z-index: 5;
 
   a {
     text-decoration: none;

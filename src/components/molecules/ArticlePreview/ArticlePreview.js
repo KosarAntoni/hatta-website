@@ -8,7 +8,7 @@ const PreviewWrapper = styled(Link)`
   display: block;
   position: relative;
   width: 100%;
-  height: 340px;
+  height: 240px;
 `;
 
 const StyledGatsbyImage = styled(GatsbyImage)`

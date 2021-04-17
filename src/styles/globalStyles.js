@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     margin: 0 auto;
     max-width: 1268px;
-    padding: 100px 0 0;
+    padding: 100px 0 40px;
     font-family: 'Montserrat', sans-serif;
   }
   button {

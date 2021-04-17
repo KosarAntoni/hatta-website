@@ -37,6 +37,7 @@ const HeroImage = styled(GatsbyImage)`
   width: 40%;
   height: 100vh;
   object-fit: cover;
+  z-index: 10;
 `
 
 const IndexPage = ({ data }) => (

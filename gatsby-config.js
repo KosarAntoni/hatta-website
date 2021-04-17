@@ -1,10 +1,10 @@
-require('dotenv').config();
+require("dotenv").config()
 
 module.exports = {
   siteMetadata: {
     title: `Gatsby Default Starter`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    author: `@gatsbyjs`
   },
   plugins: [
     `gatsby-plugin-layout`,
@@ -12,9 +12,9 @@ module.exports = {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
         fonts: [
-          `Montserrat\:400,600,700`,
+          `Montserrat\:400,600,700`
         ],
-        display: 'swap'
+        display: "swap"
       }
     },
     `gatsby-plugin-styled-components`,
@@ -23,17 +23,61 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
-        path: `${__dirname}/src/assets/images`,
-      },
+        path: `${__dirname}/src/assets/images`
+      }
     },
     `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
+      resolve: `gatsby-plugin-modal-routing`,
+      options: {
+        modalProps: {
+          //modal window style
+          style: {
+            overlay: {
+              position: "fixed",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: "rgba(0, 0, 0, 0.25)",
+              zIndex: 100,
+
+              overflow: "scroll",
+
+              cursor: "zoom-out",
+            },
+            content: {
+              position: "relative",
+              top: "auto",
+              left: "auto",
+              right: "auto",
+              bottom: "auto",
+
+              border: "none",
+              outline: "none",
+              borderRadius: "0",
+              background: "#fff",
+              overflow: "auto",
+
+              WebkitOverflowScrolling: "touch",
+              padding: "40px 40px 20px",
+              width: "100%",
+              maxWidth: "1000px",
+              margin: "40px auto",
+
+              cursor: "default",
+            }
+          }
+        }
+      }
+    },
+    {
       resolve: `gatsby-source-datocms`,
       options: {
-        apiToken: process.env.API_DATO_CMS,
-      },
+        apiToken: process.env.API_DATO_CMS
+      }
     },
     // {
     //   resolve: `gatsby-plugin-manifest`,
@@ -47,7 +91,7 @@ module.exports = {
     //     icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
     //   },
     // },
-    `gatsby-plugin-gatsby-cloud`,
+    `gatsby-plugin-gatsby-cloud`
     // `gatsby-plugin-offline`,
-  ],
+  ]
 }

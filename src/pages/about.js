@@ -51,6 +51,7 @@ const MainImage = styled(GatsbyImage)`
   width: 50%;
   height: 100vh;
   object-fit: cover;
+  z-index: 10;
 `;
 
 const AboutPage = ({data}) => (

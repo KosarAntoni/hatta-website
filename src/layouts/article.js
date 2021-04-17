@@ -6,34 +6,6 @@ import Title from "../components/atoms/Title/Title"
 import Paragraph from "../components/atoms/Paragraph/Paragraph"
 import Heading from "../components/atoms/Heading/Heading"
 
-export const query = graphql`
-  query querySingleArticle($id: String!) {
-    datoCmsArticle(id: {eq: $id}) {
-      author
-      title
-      featuredImage {
-        gatsbyImageData(layout: FULL_WIDTH, placeholder: TRACED_SVG)
-      }
-      articleContent {
-        ... on DatoCmsHeading {
-          headingContent
-          id
-        }
-        ... on DatoCmsParagraph {
-          paragraphContent
-          id
-        }
-        ... on DatoCmsImage {
-          imageData {
-            gatsbyImageData(layout: FULL_WIDTH, placeholder: TRACED_SVG)
-          }
-          id
-        }
-      }
-    }
-  }
-`
-
 const ArticleContainer = styled.div`
   width: 60%;
   text-align: right;
@@ -50,6 +22,7 @@ const MainImage = styled(GatsbyImage)`
   width: 40%;
   height: 100vh;
   object-fit: cover;
+  z-index: 10;
 `
 
 const ContentWrapper = styled.div`
@@ -87,5 +60,33 @@ const PostLayout = ({ data }) => {
     </>
   )
 }
+
+export const query = graphql`
+  query querySingleArticle($id: String!) {
+    datoCmsArticle(id: {eq: $id}) {
+      author
+      title
+      featuredImage {
+        gatsbyImageData(layout: FULL_WIDTH, placeholder: TRACED_SVG)
+      }
+      articleContent {
+        ... on DatoCmsHeading {
+          headingContent
+          id
+        }
+        ... on DatoCmsParagraph {
+          paragraphContent
+          id
+        }
+        ... on DatoCmsImage {
+          imageData {
+            gatsbyImageData(layout: FULL_WIDTH, placeholder: TRACED_SVG)
+          }
+          id
+        }
+      }
+    }
+  }
+`
 
 export default PostLayout
