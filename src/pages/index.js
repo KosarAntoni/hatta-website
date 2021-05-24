@@ -31,7 +31,7 @@ const StyledParagraph = styled(Paragraph)`
 `
 
 const HeroImage = styled(GatsbyImage)`
-  position: absolute;
+  position: fixed !important;
   top: 0;
   right: 0;
   width: 40%;
