@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import Button from "../components/atoms/Button/Button"
 import styled from "styled-components"
 import { GatsbyImage } from "gatsby-plugin-image"
@@ -45,7 +45,7 @@ const IndexPage = ({ data }) => (
     <ContentWrapper>
       <StyledTitle>Your new space</StyledTitle>
       <StyledParagraph>{data.datoCmsHeadline.headlineText}</StyledParagraph>
-      <Button>estimate project</Button>
+      <Button as={Link} to="/contact">estimate project</Button>
     </ContentWrapper>
     <HeroImage image={data.file.childImageSharp.gatsbyImageData} alt="" />
   </>

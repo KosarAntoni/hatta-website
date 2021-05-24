@@ -1,15 +1,28 @@
-import React from "react";
-import PageInfo from "../components/molecules/PageInfo/PageInfo";
+import React from "react"
+import PageInfo from "../components/molecules/PageInfo/PageInfo"
+import { graphql } from "gatsby"
+import EnhancedForm from "../components/organisms/ContactForm/ContactForm"
 
 const pageData = {
-  title: "contact",
-  paragraph: `While artists work from real to the abstract, architects must work from the abstract to the real.`
+  title: "contact"
 }
 
-const ContactPage = () => (
-    <>
-      <PageInfo title={pageData.title} paragraph={pageData.paragraph} />
-    </>
-);
+const ContactPage = ({data}) => (
+  <>
+    <PageInfo
+      title={pageData.title}
+      paragraph={data.datoCmsHeadline.headlineText}
+    />
+    <EnhancedForm user={{ email: "", name: "" }} />
+  </>
+)
 
-export default ContactPage;
+export const query = graphql`
+  {
+    datoCmsHeadline {
+      headlineText
+    }
+  }
+`
+
+export default ContactPage

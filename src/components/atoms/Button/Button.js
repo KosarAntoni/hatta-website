@@ -9,6 +9,7 @@ const Button = styled.button`
   font-weight: 600;
   flex-shrink: 0;
   transition: 0.3s;
+  text-decoration: none;
   
   :hover {
     color: black;
