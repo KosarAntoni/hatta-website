@@ -8,7 +8,7 @@ import Title from "../components/atoms/Title/Title"
 
 const ContentWrapper = styled.div`
   width: 60%;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 140px);
   text-align: right;
   display: flex;
   flex-direction: column;
