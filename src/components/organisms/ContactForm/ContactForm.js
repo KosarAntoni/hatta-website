@@ -65,14 +65,20 @@ const formikEnhancer = withFormik({
   mapPropsToValues: ({ user }) => ({
     ...user
   }),
-  handleSubmit: (payload, { setSubmitting }) => {
-    fetch("/?no-cache=1", {
+  handleSubmit: (payload, actions ) => {
+    fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "driversubmit", payload })
+      body: encode({ "form-name": "contact-demo", ...values })
     })
-    alert(payload.email)
-    setSubmitting(false)
+      .then(() => {
+        alert('Success');
+        actions.resetForm()
+      })
+      .catch(() => {
+        alert('Error');
+      })
+      .finally(() => actions.setSubmitting(false))
   },
   displayName: "ContactForm"
 })
