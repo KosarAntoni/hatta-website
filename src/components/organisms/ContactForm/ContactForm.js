@@ -25,6 +25,7 @@ const ContactForm = props => {
   } = props
   return (
     <form onSubmit={handleSubmit} data-netlify={true}>
+      <input type="hidden" name="form-name" value="contact" />
       <StyledTextInput
         id="name"
         type="text"
