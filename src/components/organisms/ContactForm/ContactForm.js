@@ -65,7 +65,7 @@ const formikEnhancer = withFormik({
   mapPropsToValues: ({ user }) => ({
     ...user
   }),
-  handleSubmit: (payload, actions ) => {
+  handleSubmit: (values, actions ) => {
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
