@@ -24,7 +24,7 @@ const ContactForm = props => {
     isSubmitting
   } = props
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} data-netlify={true}>
       <StyledTextInput
         id="name"
         type="text"
