@@ -1,5 +1,5 @@
 // import TextInput from "../../molecules/TextInput/TextInput"
-import React from "react"
+// import React from "react"
 // import { withFormik } from "formik"
 // import * as Yup from "yup"
 // import Button from "../../atoms/Button/Button"
@@ -84,61 +84,73 @@ import React from "react"
 //   displayName: "ContactForm"
 // })
 
+import React from "react";
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+
 const encode = (data) => {
   return Object.keys(data)
     .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-    .join("&")
+    .join("&");
 }
 
-class ContactForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { name: "", email: "", message: "" };
-  }
+const ContactForm = () => (
+  <Formik
+    initialValues={{
+      name: '',
+      email: '',
+      message: '',
+    }}
+    onSubmit={
+      (values, actions) => {
+        fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: encode({ "form-name": "contact-demo", ...values })
+        })
+          .then(() => {
+            alert('Success');
+            actions.resetForm()
+          })
+          .catch(() => {
+            alert('Error');
+          })
+          .finally(() => actions.setSubmitting(false))
+      }
+    }
+    validate={values => {
+      const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+      const errors = {};
+      if(!values.name) {
+        errors.name = 'Name Required'
+      }
+      if(!values.email || !emailRegex.test(values.email)) {
+        errors.email = 'Valid Email Required'
+      }
+      if(!values.message) {
+        errors.message = 'Message Required'
+      }
+      return errors;
+    }}
+  >
+    {() => (
+      <Form name="contact-demo" data-netlify={true}>
+        <label htmlFor="name">Name: </label>
+        <Field name="name" />
+        <ErrorMessage name="name" />
 
-  /* Here’s the juicy bit for posting the form submission */
+        <label htmlFor="email">Email: </label>
+        <Field name="email" />
+        <ErrorMessage name="email" />
 
-  handleSubmit = e => {
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "contact", ...this.state })
-    })
-      .then(() => alert("Success!"))
-      .catch(error => alert(error));
+        <label htmlFor="message">Message: </label>
+        <Field name="message" component="textarea"/>
+        <ErrorMessage name="message" />
 
-    e.preventDefault();
-  };
-
-  handleChange = e => this.setState({ [e.target.name]: e.target.value });
-
-  render() {
-    const { name, email, message } = this.state;
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <p>
-          <label>
-            Your Name: <input type="text" name="name" value={name} onChange={this.handleChange} />
-          </label>
-        </p>
-        <p>
-          <label>
-            Your Email: <input type="email" name="email" value={email} onChange={this.handleChange} />
-          </label>
-        </p>
-        <p>
-          <label>
-            Message: <textarea name="message" value={message} onChange={this.handleChange} />
-          </label>
-        </p>
-        <p>
-          <button type="submit">Send</button>
-        </p>
-
-      </form>
-    );
-  }
-}
+        <button type="submit">Send</button>
+      </Form>
+    )}
+  </Formik>
+)
 // const EnhancedForm = formikEnhancer(ContactForm)
 
 // export default EnhancedForm
