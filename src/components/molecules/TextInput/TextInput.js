@@ -12,6 +12,14 @@ const StyledInput = styled.input`
   border-radius: 0;
   border: 1px solid #000;
   padding: 8px;
+  transition: box-shadow 0.3s;
+  box-shadow: 0 0 0 0 #000;
+  resize: none;
+
+  :focus {
+    outline: none;
+    box-shadow: 0 0 0 1px #000;
+  }
 `
 
 const StyledLabel = styled(Label)`
@@ -21,27 +29,30 @@ const StyledLabel = styled(Label)`
 const TextInput = ({
                      type,
                      name,
-                     id,
                      placeholder,
-                     label,
                      error,
                      value,
                      onChange,
+                     onBlur,
+                     children,
+                     textarea,
                      ...props
                    }) => {
   return (
     <InputWrapper>
-      <StyledLabel htmlFor={id} error={error}>
-        {label}
+      <StyledLabel htmlFor={name} error={error}>
+        {children}
       </StyledLabel>
       <StyledInput
-        id={id}
         name={name}
         type={type}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        onBlur={onBlur}
         {...props}
+        as={textarea ? "textarea" : null}
+        rows="8"
       />
     </InputWrapper>
   )
