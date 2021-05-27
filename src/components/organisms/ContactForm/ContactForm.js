@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Button from "../../atoms/Button/Button"
 import TextInput from "../../molecules/TextInput/TextInput"
 import * as Yup from 'yup';
+import { navigate } from "gatsby"
 
 const StyledButton = styled(Button)`
   margin-top: 15px;
@@ -42,11 +43,14 @@ const ContactForm = () => (
         fetch("/", {
           method: "POST",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: encode({ "form-name": "contact-demo", ...values })
+          body: encode({ "form-name": "contact-form", ...values })
         })
           .then(() => {
-            alert('Success');
             actions.resetForm()
+            navigate(
+              "/form-submitted/",
+              { replace: true, state: {modal: true} }
+            )
           })
           .catch(() => {
             alert('Error');
@@ -55,20 +59,6 @@ const ContactForm = () => (
       }
     }
     validationSchema={ValidationSchema}
-    // validate={values => {
-    //   const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-    //   const errors = {};
-    //   if(!values.name) {
-    //     errors.name = 'Required'
-    //   }
-    //   if(!values.email || !emailRegex.test(values.email)) {
-    //     errors.email = 'Valid Email Required'
-    //   }
-    //   if(!values.message) {
-    //     errors.message = 'Required'
-    //   }
-    //   return errors;
-    // }}
   >
     {({ errors,
         values,

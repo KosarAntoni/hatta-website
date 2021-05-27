@@ -64,7 +64,7 @@ module.exports = {
               WebkitOverflowScrolling: "touch",
               padding: "40px 40px 20px",
               width: "100%",
-              maxWidth: "1000px",
+              maxWidth: "max-content",
               margin: "40px auto",
 
               cursor: "default",

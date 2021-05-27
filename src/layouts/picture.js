@@ -8,6 +8,8 @@ import Paragraph from "../components/atoms/Paragraph/Paragraph"
 const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: 1000px;
 `
 
 const CloseLink = styled(Link)`
@@ -24,31 +26,31 @@ const GalleryLink = styled(Link)`
 `
 
 const StyledGatsbyImage = styled(GatsbyImage)`
+  max-height: 70vh;
+  margin: auto;
 `
 
 const PictureLayout = ({ data }) => (
-  <div>
-    <ModalRoutingContext.Consumer>
-      {({ modal, closeTo }) => (
-        <ContentWrapper>
-          {modal ? (
-            <CloseLink to={closeTo}>
-              Close
-            </CloseLink>
-          ) : (
-            <GalleryLink to="/gallery">&#8592; back to gallery</GalleryLink>
-          )}
+  <ModalRoutingContext.Consumer>
+    {({ modal, closeTo }) => (
+      <ContentWrapper>
+        {modal ? (
+          <CloseLink to={closeTo}>
+            Close
+          </CloseLink>
+        ) : (
+          <GalleryLink to="/gallery">&#8592; back to gallery</GalleryLink>
+        )}
 
-          <StyledGatsbyImage
-            alt={data.datoCmsPicture.pictureInfo}
-            image={data.datoCmsPicture.pictureData.gatsbyImageData}
-          />
+        <StyledGatsbyImage
+          alt={data.datoCmsPicture.pictureInfo}
+          image={data.datoCmsPicture.pictureData.gatsbyImageData}
+        />
 
-          <Paragraph>{data.datoCmsPicture.pictureInfo}</Paragraph>
-        </ContentWrapper>
-      )}
-    </ModalRoutingContext.Consumer>
-  </div>
+        <Paragraph>{data.datoCmsPicture.pictureInfo}</Paragraph>
+      </ContentWrapper>
+    )}
+  </ModalRoutingContext.Consumer>
 )
 
 export const query = graphql`
@@ -56,7 +58,7 @@ export const query = graphql`
     datoCmsPicture(id: {eq: $id}) {
       pictureInfo
       pictureData {
-        gatsbyImageData(placeholder: TRACED_SVG, layout: FULL_WIDTH)
+        gatsbyImageData(placeholder: TRACED_SVG, layout: FIXED)
       }
     }
   }
